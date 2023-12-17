@@ -1,29 +1,25 @@
 export const config = {
   rootApi: 'api',
-  mainConfigId: process.env.MAIN_CONFIG_ID || 'default126dGs584ESY3',
-  minBetAmount: process.env.MIN_BET || 5000,
-  roleInit: {
-    member: process.env.INIT_MEMBER_ROLE || 'member',
-    admin: process.env.INIT_ADMIN_ROLE || 'admin',
-  },
   requestLimit: {
     time: process.env.LIMIT_REQUEST_PER_SECOND || 60,
     limit: process.env.LIMIT_REQUEST || 100,
-  },
-  cron: {
-    nextGames: '*/1 * * * *',
-  },
-  thirdParty: {
-    nextGames: {
-      timeout: process.env.HTTP_TIMEOUT || 5000,
-      maxRedirects: process.env.LIMIT_REQUEST || 5,
-    },
   },
   initAccount: {
     username: process.env.INIT_ADMIN_USERNAME || 'admin',
     password: process.env.INIT_ADMIN_PWD || 'password',
     exchangePassword: process.env.INIT_ADMIN_EX_PWD || 'expassword',
     phone: process.env.INIT_ADMIN_PHONE || '0123456789',
+  },
+  aws: {
+    config: {
+      region: process.env.DYNAMODB_REGION || 'admin',
+      accessKeyId: process.env.DYNAMODB_REGION || 'admin',
+      secretAccessKey: process.env.DYNAMODB_REGION || 'admin',
+    },
+    dynamodb: {
+      endpoint: process.env.DYNAMODB_REGION || 'admin',
+      region: process.env.DYNAMODB_REGION || 'admin',
+    }
   },
   db: {
     postgres: {
@@ -63,9 +59,6 @@ export const config = {
       },
       autoLoadEntities: true,
     },
-  },
-  crawler: {
-    chunkSize: process.env.CRAWLER_CHUNK_SIZE || 100,
   },
   cache: {
     password: process.env.REDIS_PWD || 'password',

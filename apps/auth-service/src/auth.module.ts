@@ -1,9 +1,16 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './auth.controller';
 import { AppService } from './auth.service';
+import { configuration } from '@lib/config/configuration';
+import { DynamoDBModule } from '@lib/module/dynamo';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      load: [configuration],
+      isGlobal: true,
+    }),
     DynamoDBModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({
