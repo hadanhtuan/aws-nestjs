@@ -76,12 +76,10 @@ export const config = {
       process.env.JWT_REFRESH_SECRET_EXPIRE_DIGIT || 'day',
   },
   services: {
-    adminGateway: {
+    apiGateway: {
       port: process.env.ADMIN_GATEWAY_PORT || 3000,
     },
-    userGateway: {
-      port: process.env.USER_GATEWAY_PORT || 3030,
-    },
+
     authService: {
       transport: 0,
       options: {
@@ -89,58 +87,5 @@ export const config = {
         port: process.env.AUTH_SERVICE_PORT || 3001,
       },
     },
-    configService: {
-      transport: 0,
-      options: {
-        host: process.env.CONFIG_SERVICE_HOST || '0.0.0.0',
-        port: process.env.CONFIG_SERVICE_PORT || 3002,
-      },
-    },
-    memberService: {
-      transport: 0,
-      options: {
-        host: process.env.MEMBER_SERVICE_HOST || '0.0.0.0',
-        port: process.env.MEMBER_SERVICE_PORT || 3003,
-      },
-    },
-    communicateService: {
-      transport: 0,
-      options: {
-        host: process.env.COMMUNICATE_SERVICE_HOST || '0.0.0.0',
-        port: process.env.COMMUNICATE_SERVICE_PORT || 3004,
-      },
-    },
-    calculateService: {
-      transport: 0,
-      options: {
-        host: process.env.CALCULATE_SERVICE_HOST || '0.0.0.0',
-        port: process.env.CALCULATE_SERVICE_POST || 3005,
-      },
-    },
-    gameService: {
-      transport: 0,
-      options: {
-        host: process.env.GAME_SERVICE_HOST || '0.0.0.0',
-        port: process.env.GAME_SERVICE_POST || 3006,
-      },
-    },
-    orderService: {
-      transport: 0,
-      options: {
-        host: process.env.ORDER_SERVICE_HOST || '0.0.0.0',
-        port: process.env.ORDER_SERVICE_POST || 3007,
-      },
-    },
-    socketService: {
-      port: process.env.SOCKET_SERVICE_PORT || 6060,
-      url: `${process.env.SOCKET_SERVICE_HOST}:${process.env.SOCKET_SERVICE_PORT}`,
-    },
-    crawlerService: {
-      transport: 0,
-      options: {
-        host: process.env.CRAWLER_SERVICE_HOST || '0.0.0.0',
-        port: process.env.CRAWLER_SERVICE_POST || 3008,
-      },
-    },
-  },
+  }
 };

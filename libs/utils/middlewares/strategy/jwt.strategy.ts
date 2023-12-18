@@ -1,5 +1,5 @@
 import { DateDigit } from '@lib/common/enums';
-import { IJwtPayload } from '@lib/common/interfaces/modules/auth';
+import { IJwtPayload } from '@lib/common/interfaces/auth';
 import { addTime, convertDateToSecond } from '@lib/utils/helpers';
 import * as jwt from 'jsonwebtoken';
 

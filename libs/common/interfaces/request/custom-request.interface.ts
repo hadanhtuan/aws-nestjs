@@ -1,4 +1,4 @@
-import { IJwtPayload } from '../modules/auth';
+import { IJwtPayload } from "../auth";
 
 export interface ICustomRequest extends Request {
   fingerprint?: any;

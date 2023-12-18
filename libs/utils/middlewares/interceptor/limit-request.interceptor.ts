@@ -1,5 +1,5 @@
 import { IRequestLimit } from '@lib/common/interfaces';
-import { UserAgentService } from '@lib/utils/modules';
+import { UserAgentService } from '@lib/module/ua-parser';
 import {
   CallHandler,
   ExecutionContext,

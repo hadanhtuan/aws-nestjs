@@ -1,11 +1,11 @@
 import { metaData } from '@lib/common/constants';
 import { ServiceName } from '@lib/common/enums';
 import { ICustomRequest } from '@lib/common/interfaces';
-import { IJwtPayload } from '@lib/common/interfaces/modules/auth';
+import { IJwtPayload } from '@lib/common/interfaces/auth';
 import { ServiceProviderBuilder } from '@lib/core/message-handler';
+import { UserAgentService } from '@lib/module/ua-parser';
 import { parseJwtHeader } from '@lib/utils/helpers';
 import { JwtStrategy } from '@lib/utils/middlewares/strategy';
-import { UserAgentService } from '@lib/utils/modules';
 import {
   CanActivate,
   ExecutionContext,

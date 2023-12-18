@@ -2,7 +2,6 @@ import { ServiceName } from '@lib/common/enums';
 import { GatewayName } from '@lib/common/types';
 import { HttpStatus } from '@nestjs/common';
 import { ClientOptions } from '@nestjs/microservices';
-import { GatewaysName } from '../..';
 
 export interface IServiceResponse {
   statusCode: HttpStatus;
@@ -28,5 +27,5 @@ export interface IMessage<T = unknown> {
   memberId?: string;
   payload: T;
   searchTerm?: string;
-  context?: GatewaysName;
+  context?: ServiceName;
 }
