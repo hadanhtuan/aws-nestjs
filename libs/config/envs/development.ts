@@ -12,14 +12,15 @@ export const config = {
   },
   aws: {
     config: {
-      region: process.env.DYNAMODB_REGION || 'admin',
-      accessKeyId: process.env.DYNAMODB_REGION || 'admin',
-      secretAccessKey: process.env.DYNAMODB_REGION || 'admin',
+      region: process.env.AWS_REGION || 'admin',
+      accessKeyId: process.env.AWS_ACCESS_ID || 'admin',
+      secretAccessKey: process.env.AWS_SECRET_KET || 'admin',
     },
     dynamodb: {
-      endpoint: process.env.DYNAMODB_REGION || 'admin',
+      endpoint: process.env.DYNAMODB_ENDPOINT || 'admin',
       region: process.env.DYNAMODB_REGION || 'admin',
-    }
+      sslEnabled: false,
+    },
   },
   db: {
     postgres: {
@@ -77,15 +78,15 @@ export const config = {
   },
   services: {
     apiGateway: {
-      port: process.env.ADMIN_GATEWAY_PORT || 3000,
+      port: process.env.ADMIN_GATEWAY_PORT || 5000,
     },
 
     authService: {
       transport: 0,
       options: {
         host: process.env.AUTH_SERVICE_HOST || '0.0.0.0',
-        port: process.env.AUTH_SERVICE_PORT || 3001,
+        port: process.env.AUTH_SERVICE_PORT || 5001,
       },
     },
-  }
+  },
 };

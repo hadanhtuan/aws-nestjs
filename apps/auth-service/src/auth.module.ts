@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AppController } from './auth.controller';
-import { AppService } from './auth.service';
 import { configuration } from '@lib/config/configuration';
 import { DynamoDBModule } from '@lib/module/dynamo';
+import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
 
 @Module({
   imports: [
@@ -13,22 +13,16 @@ import { DynamoDBModule } from '@lib/module/dynamo';
     }),
     DynamoDBModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: async (config: ConfigService) => ({
-        AWSConfig: {
-          region: 'local',
-          accessKeyId: 'null',
-          secretAccessKey: 'null',
-        },
-        dynamoDBOptions: {
-          endpoint: config.get<string>('DYNAMODB_URL', 'localhost:8000'),
-          sslEnabled: false,
-          region: 'local-env',
-        },
-      }),
+      useFactory: async (config: ConfigService) => {
+        return {
+          AWSConfig: config.get('aws.config'),
+          dynamoDBOptions: config.get('aws.dynamodb'),
+        };
+      },
       inject: [ConfigService],
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AuthController],
+  providers: [AuthService],
 })
-export class AppModule {}
+export class AuthModule {}

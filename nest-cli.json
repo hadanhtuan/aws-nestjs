@@ -10,22 +10,13 @@
   "monorepo": true,
   "root": "apps/nestjs-aws",
   "projects": {
-    "nestjs-aws": {
+    "auth-service": {
       "type": "application",
-      "root": "apps/nestjs-aws",
+      "root": "apps/auth-service",
       "entryFile": "main",
-      "sourceRoot": "apps/nestjs-aws/src",
+      "sourceRoot": "apps/auth-service/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/nestjs-aws/tsconfig.app.json"
-      }
-    },
-    "my-app": {
-      "type": "application",
-      "root": "apps/my-app",
-      "entryFile": "main",
-      "sourceRoot": "apps/my-app/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/my-app/tsconfig.app.json"
+        "tsConfigPath": "apps/auth-service/tsconfig.app.json"
       }
     },
     "api-gateway": {

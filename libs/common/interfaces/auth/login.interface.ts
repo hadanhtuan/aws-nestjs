@@ -20,3 +20,13 @@ export interface IUpdatePassword {
   oldPassword: string;
   newPassword: string;
 }
+
+export interface ILogin {
+  username: string;
+  password: string;
+}
+
+export interface IRegister extends ILogin {
+  email?: string;
+  age?: number;
+}

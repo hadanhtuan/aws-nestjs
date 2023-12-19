@@ -1,7 +1,7 @@
 import {
   attribute,
   rangeKey,
-  table
+  table,
 } from '@aws/dynamodb-data-mapper-annotations';
 import { DynamoBaseSchema } from './base.schema';
 

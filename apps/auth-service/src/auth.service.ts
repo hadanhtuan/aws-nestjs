@@ -1,8 +1,13 @@
+import { ILogin, IRegister } from '@lib/common/interfaces/auth';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+export class AuthService {
+  async register(payload: IRegister) {
+    return payload;
+  }
+
+  async login(payload: ILogin) {
+    return payload;
   }
 }
