@@ -1,13 +1,13 @@
-import { isClass } from 'is-class'
+import { isClass } from 'is-class';
 import {
   DynamoDBClass,
   DynamoDBClassWithOptions,
   DynamoDBInput,
-} from '../interfaces'
+} from '../interfaces';
 
-const isDynamoDBClass = (item): item is DynamoDBClass => isClass(item)
+const isDynamoDBClass = (item): item is DynamoDBClass => isClass(item);
 const isDynamoDBClassWithOptions = (item): item is DynamoDBClassWithOptions =>
-  isDynamoDBClass(item.dynamoDBClass)
+  isDynamoDBClass(item.dynamoDBClass);
 
 export const convertToClassWithOptions = (
   item: DynamoDBInput,
@@ -19,13 +19,13 @@ export const convertToClassWithOptions = (
         readCapacityUnits: 5,
         writeCapacityUnits: 5,
       },
-    }
+    };
   } else if (isDynamoDBClassWithOptions(item)) {
-    return item
+    return item;
   }
-  return invalidObject('model')
-}
+  return invalidObject('model');
+};
 
 function invalidObject(type: string): never {
-  throw new Error(`Invalid ${type} object`)
+  throw new Error(`Invalid ${type} object`);
 }

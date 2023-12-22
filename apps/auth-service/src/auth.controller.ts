@@ -1,10 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { MessagePattern } from '@nestjs/microservices';
-import { getPattern } from '@lib/utils/helpers';
 import { ServiceName } from '@lib/common/enums';
 import { IMessage } from '@lib/common/interfaces';
 import { ILogin, IRegister } from '@lib/common/interfaces/auth';
+import { getPattern } from '@lib/utils/helpers';
+import { Controller } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
+import { AuthService } from './auth.service';
 
 @Controller()
 export class AuthController {
@@ -17,7 +17,7 @@ export class AuthController {
       AuthController.prototype.login.name,
     ),
   })
-  login(message: IMessage<ILogin>): string {
+  login(message: IMessage<ILogin>) {
     const { payload } = message;
     return this.authService.login(payload);
   }
@@ -28,9 +28,21 @@ export class AuthController {
       AuthController.prototype.register.name,
     ),
   })
-  register(message: IMessage<IRegister>): string {
+  register(message: IMessage<IRegister>) {
     const { payload } = message;
 
     return this.authService.register(payload);
+  }
+
+  @MessagePattern({
+    cmd: getPattern(
+      AuthController.prefixCmd,
+      AuthController.prototype.getProfile.name,
+    ),
+  })
+  getProfile(message: IMessage) {
+    const { id } = message;
+
+    return this.authService.getProfile(id);
   }
 }

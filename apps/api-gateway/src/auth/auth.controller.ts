@@ -2,7 +2,7 @@ import { ServiceName } from '@lib/common/enums';
 import { IPatternMessage } from '@lib/common/interfaces';
 import { BaseGatewayController } from '@lib/core/base';
 import { ServiceProviderBuilder } from '@lib/core/message-handler';
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Param, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { LoginDto, RegisterDto } from './dto';
 
@@ -15,9 +15,7 @@ export class AuthController extends BaseGatewayController {
   }
 
   @Post('login')
-  login(
-    @Body() payload: LoginDto,
-  ) {
+  login(@Body() payload: LoginDto) {
     const functionName = AuthController.prototype.login.name;
     const pattern: IPatternMessage = {
       cmd: this.prefixCmd(functionName),
@@ -33,9 +31,7 @@ export class AuthController extends BaseGatewayController {
   }
 
   @Post('register')
-  register(
-    @Body() payload: RegisterDto,
-  ) {
+  register(@Body() payload: RegisterDto) {
     const functionName = AuthController.prototype.register.name;
     const pattern: IPatternMessage = {
       cmd: this.prefixCmd(functionName),
@@ -49,6 +45,20 @@ export class AuthController extends BaseGatewayController {
       pattern,
     );
   }
+
+  @Post('profile/:id')
+  getProfile(@Param('id') id: string) {
+    const functionName = AuthController.prototype.getProfile.name;
+    const pattern: IPatternMessage = {
+      cmd: this.prefixCmd(functionName),
+    };
+
+    const message = { id };
+
+    return this.serviceClient.sendMessage(
+      ServiceName.AUTH_SERVICE,
+      message,
+      pattern,
+    );
+  }
 }
-
-
