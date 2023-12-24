@@ -4,23 +4,17 @@ import { User } from '@lib/core/databases/dynamo';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as DynamoDB from 'aws-sdk/clients/dynamodb';
+import AWS from 'aws-sdk';
+import { DynamoRepository } from '@lib/core/base';
 
 @Injectable()
-export class AuthService {
-  private mapper: DataMapper;
+export class AuthService extends DynamoRepository {
   constructor(private configService: ConfigService) {
-    const awsConfig = this.configService.get('aws.config');
-    console.log(awsConfig);
-
-    this.mapper = new DataMapper({
-      client: new DynamoDB(awsConfig), // the SDK client used to execute operations
-    });
+    super(configService);
   }
 
   async register(payload: IRegister) {
-    const entity = Object.assign(new User(), payload);
-
-    const result = await this.mapper.put(entity);
+    const result = await this.create(User, payload);
     return result;
   }
 
@@ -28,24 +22,15 @@ export class AuthService {
     return payload;
   }
 
-  async getProfile(id: string) {
-    //get by partition key(query)
-    // const result = await this.mapper.get(
-    //   Object.assign(new User(), {
-    //     id,
-    //     username: 'string',
-    //   }),
-    // );
+  async getUserById(id: string) {
+    // get by partition key(query)
+    const result = await this.mapper.get(
+      Object.assign(new User(), {
+        id,
+        username: 'string',
+      }),
+    );
 
-    const usersIterator = this.mapper.scan(User, {
-      filter: {
-        type: 'And',
-        conditions: [
-          new ConditionExpression('username', 'eq', 'john')
-        ]
-      }
-    });
     return result;
-    }
   }
 }

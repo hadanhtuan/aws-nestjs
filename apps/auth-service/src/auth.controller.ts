@@ -34,15 +34,15 @@ export class AuthController {
     return this.authService.register(payload);
   }
 
-  @MessagePattern({
-    cmd: getPattern(
-      AuthController.prefixCmd,
-      AuthController.prototype.getProfile.name,
-    ),
-  })
-  getProfile(message: IMessage) {
-    const { id } = message;
+  // @MessagePattern({
+  //   cmd: getPattern(
+  //     AuthController.prefixCmd,
+  //     AuthController.prototype.getProfile.name,
+  //   ),
+  // })
+  // getProfile(message: IMessage) {
+  //   const { id } = message;
 
-    return this.authService.getProfile(id);
-  }
+  //   return this.authService.getProfile(id);
+  // }
 }

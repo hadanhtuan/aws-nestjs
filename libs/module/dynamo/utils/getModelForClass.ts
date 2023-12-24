@@ -207,19 +207,7 @@ export class GetModelForClass<T extends instanceOfDynamoDBClass> {
     return result;
   }
 
-  async find(input?: Partial<DynamoDBClass>, options: any = {}): Promise<T[]> {
-    // if (!input || JSON.stringify(input) === JSON.stringify({})) {
-    //   for await (const item of this.mapper.scan(this.dynamoDBClass)) {
-    //     results.push(item)
-    //   }
-    // } else if (
-    //   keys.includes(this.hashKey) ||
-    //   (keys.includes(this.hashKey) && keys. includes(this.rangeKey))
-    // ) {
-    //   for await (const item of this.mapper.query(this.dynamoDBClass, input)) {
-    //     results.push(item)
-    //   }
-    // } else {
+  async find(input?: Partial<DynamoDBClass>, options: any = {}): Promise<T[]> { 
     const parsedObj = this.parseObject(input, options);
     console.log('parsed', parsedObj);
     let lastKey = null;
