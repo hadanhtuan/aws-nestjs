@@ -1,6 +1,6 @@
 import { ServiceName } from '@lib/common/enums';
 import { IMessage } from '@lib/common/interfaces';
-import { ILogin, IRegister } from '@lib/common/interfaces/auth';
+import { ILogin, IRegister, IUser } from '@lib/common/interfaces/auth';
 import { getPattern } from '@lib/utils/helpers';
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
@@ -14,12 +14,23 @@ export class AuthController {
   @MessagePattern({
     cmd: getPattern(
       AuthController.prefixCmd,
-      AuthController.prototype.login.name,
+      AuthController.prototype.updateUser.name,
     ),
   })
-  login(message: IMessage<ILogin>) {
+  updateUser(message: IMessage<ILogin>) {
     const { payload } = message;
-    return this.authService.login(payload);
+    return this.authService.updateUser(payload);
+  }
+
+  @MessagePattern({
+    cmd: getPattern(
+      AuthController.prefixCmd,
+      AuthController.prototype.deleteUser.name,
+    ),
+  })
+  deleteUser(message: IMessage<ILogin>) {
+    const { payload } = message;
+    return this.authService.deleteUser(payload);
   }
 
   @MessagePattern({
@@ -34,15 +45,15 @@ export class AuthController {
     return this.authService.register(payload);
   }
 
-  // @MessagePattern({
-  //   cmd: getPattern(
-  //     AuthController.prefixCmd,
-  //     AuthController.prototype.getProfile.name,
-  //   ),
-  // })
-  // getProfile(message: IMessage) {
-  //   const { id } = message;
+  @MessagePattern({
+    cmd: getPattern(
+      AuthController.prefixCmd,
+      AuthController.prototype.findUser.name,
+    ),
+  })
+  findUser(message: IMessage<IUser>) {
+    const { payload } = message;
 
-  //   return this.authService.getProfile(id);
-  // }
+    return this.authService.findUser(payload);
+  }
 }

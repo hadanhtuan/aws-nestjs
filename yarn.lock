@@ -338,6 +338,16 @@
     mnemonist "0.38.3"
     tslib "^2.5.0"
 
+"@aws-sdk/lib-dynamodb@^3.481.0":
+  version "3.481.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/lib-dynamodb/-/lib-dynamodb-3.481.0.tgz#70c29f3fb15fc7e2d96e408f244e4018e9ef786e"
+  integrity sha512-8TgpDBDMrls6KhusWx3+clIrU4jQd72HHlhuB7CMD1Od+dsT+Ov4L+NZjQ1V5+NwyMiPjAMiSB0SMZlKLjzPmg==
+  dependencies:
+    "@aws-sdk/util-dynamodb" "3.481.0"
+    "@smithy/smithy-client" "^2.2.0"
+    "@smithy/types" "^2.7.0"
+    tslib "^2.5.0"
+
 "@aws-sdk/middleware-endpoint-discovery@3.470.0":
   version "3.470.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/middleware-endpoint-discovery/-/middleware-endpoint-discovery-3.470.0.tgz#7bc25fac1a334b93f6bdba62c740bf0501837422"
@@ -465,6 +475,13 @@
     "@smithy/types" "^2.7.0"
     tslib "^2.5.0"
 
+"@aws-sdk/util-dynamodb@3.481.0":
+  version "3.481.0"
+  resolved "https://registry.yarnpkg.com/@aws-sdk/util-dynamodb/-/util-dynamodb-3.481.0.tgz#cbccae437918aee26875678d444497d9e6c446e7"
+  integrity sha512-43okW9YKT2YyUPVbLvrXjzAEptoHyWL4SdzWHbaxNJiEBVn7pq6eYqWzgWAnH12Vz1wbRP/iYWU/ZzwaozzA9w==
+  dependencies:
+    tslib "^2.5.0"
+
 "@aws-sdk/util-dynamodb@^3.142.0":
   version "3.474.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/util-dynamodb/-/util-dynamodb-3.474.0.tgz#635330a829f5f61ce9dfcf2010c1f6d60049f487"
@@ -529,18 +546,6 @@
   dependencies:
     tslib "^1.8.1"
     utf8-bytes "^0.0.1"
-
-"@aws/dynamodb-data-mapper-annotations@^0.7.3":
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/@aws/dynamodb-data-mapper-annotations/-/dynamodb-data-mapper-annotations-0.7.3.tgz#8c04598a1dd3ec1b69996020afebcecc6f2c41f7"
-  integrity sha512-RROw+6EIJd0bJsl/76wxfvDkv/irY9pfpp/VRlmEIVixKW2UtMqpni+Hs0XuBRtmGKGfFrWB2WGYiikSnfv4FA==
-  dependencies:
-    "@aws/dynamodb-auto-marshaller" "^0.7.1"
-    "@aws/dynamodb-data-mapper" "^0.7.3"
-    "@aws/dynamodb-data-marshaller" "^0.7.3"
-    reflect-metadata "^0.1.10"
-    tslib "^1.8.1"
-    uuid "^3.0.0"
 
 "@aws/dynamodb-data-mapper@^0.7.3":
   version "0.7.3"
@@ -1616,6 +1621,18 @@
     "@smithy/util-stream" "^2.0.23"
     tslib "^2.5.0"
 
+"@smithy/smithy-client@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@smithy/smithy-client/-/smithy-client-2.2.0.tgz#9865981a2f49dd0e9ef68193aebcd5654cdd7f00"
+  integrity sha512-C/bkNue5H5Obgl83SnlBt4v6VM68CqIjIELh3vAabud87xFYznLNKtj6Qb69Z+QOnLp9T+We++sEem/f2AHE+Q==
+  dependencies:
+    "@smithy/middleware-endpoint" "^2.2.3"
+    "@smithy/middleware-stack" "^2.0.9"
+    "@smithy/protocol-http" "^3.0.11"
+    "@smithy/types" "^2.7.0"
+    "@smithy/util-stream" "^2.0.23"
+    tslib "^2.5.0"
+
 "@smithy/types@^2.7.0":
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/@smithy/types/-/types-2.7.0.tgz#6ed9ba5bff7c4d28c980cff967e6d8456840a4f3"
@@ -1783,6 +1800,33 @@
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.4.tgz#0b92dcc0cc1c81f6f306a381f28e31b1a56536e9"
   integrity sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==
+
+"@typedorm/common@^1.15.4":
+  version "1.15.4"
+  resolved "https://registry.yarnpkg.com/@typedorm/common/-/common-1.15.4.tgz#5f614c906f2fc688326c65dbceca71a1d04a59d8"
+  integrity sha512-BdmNaKpanGJOGGZGg3acFoK/tnDVIvHxhZ3X+x4XCOfBWLbSzTsgfG7VBmsaaKOw8Hb1Vv65S6j4O+v0DO8KjQ==
+  dependencies:
+    chalk "^4.1.0"
+    class-transformer "0.4.0"
+    debug "^4.3.1"
+    uuid "^8.3.1"
+
+"@typedorm/core@^1.15.4":
+  version "1.15.4"
+  resolved "https://registry.yarnpkg.com/@typedorm/core/-/core-1.15.4.tgz#f05320e92a1c4c20da9eff63284333e50718d526"
+  integrity sha512-cTlxJZzNd9QYcbcmLVExV4Ry5F+8VOzySGwmxS/e/cLDVvf5i6xb5UlTfxXFw2VVnsQoptMwkwQQqc+LEo+xQw==
+  dependencies:
+    "@typedorm/document-client" "1.15.4"
+    class-transformer "0.4.0"
+    fast-glob "^3.2.4"
+    ksuid "^2.0.0"
+    p-limit "^3.1.0"
+    uuid "^8.3.1"
+
+"@typedorm/document-client@1.15.4":
+  version "1.15.4"
+  resolved "https://registry.yarnpkg.com/@typedorm/document-client/-/document-client-1.15.4.tgz#a098f7bd03b0583bb9fa1fa9898c272e634843a7"
+  integrity sha512-8wk60QbAzQMPkjxFnWDYpLaJVB1gvQRbO6tDU2AK1eMzFOxe/FFrsUNF9MBxmwv6OlUfQHGup5ymlkcVWicYGQ==
 
 "@types/babel__core@^7.1.14":
   version "7.20.5"
@@ -2488,6 +2532,11 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
 
+base-convert-int-array@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/base-convert-int-array/-/base-convert-int-array-1.0.1.tgz#5b4ddbfa72d2d3b5f75dd86cd32fe3dc8e7e81fe"
+  integrity sha512-NWqzaoXx8L/SS32R+WmKqnQkVXVYl2PwNJ68QV3RAlRRL1uV+yxJT66abXI1cAvqCXQTyXr7/9NN4Af90/zDVw==
+
 base64-js@^1.0.2, base64-js@^1.3.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
@@ -2742,6 +2791,11 @@ cjs-module-lexer@^1.0.0:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-1.2.3.tgz#6c370ab19f8a3394e318fe682686ec0ac684d107"
   integrity sha512-0TNiGstbQmCFwt4akjjBg5pLRTSyj/PkWQ1ZoO2zntmg9yLqSRxwEa4iCfQLGjqhiqBfOJa7W/E8wfGrTDmlZQ==
+
+class-transformer@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.4.0.tgz#b52144117b423c516afb44cc1c76dbad31c2165b"
+  integrity sha512-ETWD/H2TbWbKEi7m9N4Km5+cw1hNcqJSxlSYhsLsNjQzWWiZIYA1zafxpK9PwVfaZ6AqR5rrjPVUBGESm5tQUA==
 
 class-transformer@^0.5.1:
   version "0.5.1"
@@ -3471,7 +3525,7 @@ fast-diff@^1.1.2:
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.3.0.tgz#ece407fa550a64d638536cd727e129c61616e0f0"
   integrity sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==
 
-fast-glob@^3.2.9, fast-glob@^3.3.0:
+fast-glob@^3.2.4, fast-glob@^3.2.9, fast-glob@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.3.2.tgz#a904501e57cfdd2ffcded45e99a54fef55e46129"
   integrity sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==
@@ -4739,6 +4793,13 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
+ksuid@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ksuid/-/ksuid-2.0.0.tgz#83618ce67b235bb5f41c04cb914a2605e1ffca5a"
+  integrity sha512-BM5UU56FhzqQN6v83X8JSKWktl0gAYRovV0DnO/mXpuOs/SFMTPP7fr7ViNtzpg3iV4pnk/6pChuLhOkKBZ59A==
+  dependencies:
+    base-convert-int-array "^1.0.1"
+
 lazy@1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/lazy/-/lazy-1.0.11.tgz#daa068206282542c088288e975c297c1ae77b690"
@@ -5544,7 +5605,7 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-reflect-metadata@^0.1.10, reflect-metadata@^0.1.13:
+reflect-metadata@^0.1.13:
   version "0.1.14"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.14.tgz#24cf721fe60677146bb77eeb0e1f9dece3d65859"
   integrity sha512-ZhYeb6nRaXCfhnndflDK8qI6ZQ/YcWZCISRAWICW9XYqMUwjZM9Z0DveWX/ABN01oxSHwVxKQmxeYZSsm0jh5A==
@@ -6322,12 +6383,7 @@ uuid@9.0.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
   integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
 
-uuid@^3.0.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
-  integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
-
-uuid@^8.3.2:
+uuid@^8.3.1, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==

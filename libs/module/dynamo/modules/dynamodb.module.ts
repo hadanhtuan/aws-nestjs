@@ -1,41 +1,145 @@
-import { DynamicModule, Module } from '@nestjs/common';
-
-import { convertToClassWithOptions } from '../utils/convertToClassWithOptions';
-import { DynamoDBCoreModule } from './dynamodb.core.module';
+import { DynamicModule, Global, Module, Provider } from '@nestjs/common';
 import {
-  DynamoDBModuleAsyncOptions,
-  DynamoDBModuleOptions,
-  DynamoDBInput,
+  Connection,
+  ConnectionOptions,
+  createConnection,
+} from '@typedorm/core';
+import {
+  TypeDormModuleAsyncOptions,
+  TypeDormModuleOption,
+  TypeDormModuleOptionFactory,
 } from '../interfaces';
-import { createDynamoDBProvider } from '../providers';
+import { TypeDormConnection } from '../providers';
+import {
+  getTypeDormConnectionToken,
+  getTypeDormConnectionOptionToken,
+} from '../utils';
 
+@Global()
 @Module({})
-export class DynamoDBModule {
-  static forRoot(options: DynamoDBModuleOptions): DynamicModule {
+export class TypeDormModule {
+  /**
+   * Reigister typeDorm module for root,
+   * use `InjectTypeDorm` to inject TypeDormConnection
+   * ```ts
+   * constructor(@InjectTypeDorm() private readonly connection: TypeDormConnection)
+   * ```
+   * @param connectionOptions
+   * @returns DynamicModule
+   */
+  static forRoot(option: TypeDormModuleOption) {
+    const typeDormProvider: Provider<Connection> = {
+      provide: getTypeDormConnectionToken(option.name),
+      useValue: createConnection(option),
+    };
     return {
-      module: DynamoDBModule,
-      imports: [DynamoDBCoreModule.forRoot(options)],
+      module: TypeDormModule,
+      providers: [typeDormProvider],
+      exports: [typeDormProvider],
     };
   }
 
-  static forRootAsync(options: DynamoDBModuleAsyncOptions): DynamicModule {
+  /**
+   * Reigister typeDorm module for root async,
+   * use `InjectTypeDorm` to inject TypeDormConnection
+   * ```ts
+   * constructor(@InjectTypeDorm() private readonly connection: TypeDormConnection)
+   * ```
+   * @param TypeDormModuleAsyncOptions
+   * @returns DynamicModule
+   */
+  public static forRootAsync(
+    asyncOptions: TypeDormModuleAsyncOptions,
+  ): DynamicModule {
+    const { name } = asyncOptions;
+    const typeDormProvider: Provider<Connection> = {
+      provide: getTypeDormConnectionToken(name),
+      useFactory(options: ConnectionOptions) {
+        return createConnection(options);
+      },
+      inject: [getTypeDormConnectionOptionToken(name)],
+    };
+
     return {
-      module: DynamoDBModule,
-      imports: [DynamoDBCoreModule.forRootAsync(options)],
+      module: TypeDormModule,
+      imports: asyncOptions.imports,
+      providers: [...this.createAsyncProviders(asyncOptions), typeDormProvider],
+      exports: [typeDormProvider],
     };
   }
 
-  static forFeature(models: DynamoDBInput[]): DynamicModule {
-    const convertedModels = models.map((model) =>
-      convertToClassWithOptions(model),
-    );
+  /* createAsyncProviders */
+  public static createAsyncProviders(
+    options: TypeDormModuleAsyncOptions,
+  ): Provider[] {
+    if (!(options.useExisting || options.useFactory || options.useClass)) {
+      throw new Error(
+        'Invalid configuration. Must provide useFactory, useClass or useExisting',
+      );
+    }
 
-    const providers = createDynamoDBProvider(convertedModels);
+    if (options.useExisting || options.useFactory) {
+      return [this.createAsyncOptionsProvider(options)];
+    }
+
+    return [
+      this.createAsyncOptionsProvider(options),
+      { provide: options.useClass!, useClass: options.useClass! },
+    ];
+  }
+
+  /* createAsyncOptionsProvider */
+  public static createAsyncOptionsProvider({
+    name,
+    ...options
+  }: TypeDormModuleAsyncOptions): Provider<ConnectionOptions> {
+    if (!(options.useExisting || options.useFactory || options.useClass)) {
+      throw new Error(
+        'Invalid configuration. Must provide useFactory, useClass or useExisting',
+      );
+    }
+
+    if (options.useFactory) {
+      return {
+        provide: getTypeDormConnectionOptionToken(name),
+        useFactory: options.useFactory,
+        inject: options.inject ?? [],
+      };
+    }
 
     return {
-      module: DynamoDBModule,
-      providers,
-      exports: providers,
+      provide: getTypeDormConnectionOptionToken(name),
+      useFactory(optionsFactory: TypeDormModuleOptionFactory) {
+        return optionsFactory.createTypeDormConnectionOptions();
+      },
+      inject: [options.useClass ?? options.useExisting!],
+    };
+  }
+
+  /**
+   * Reigister typeDorm module for root,
+   * do not require using `InjectTypeDorm` to inject TypeDormConnection
+   * ```ts
+   * constructor(
+   *  private readonly connection: TypeDormConnection,
+   * ) {}
+   * ```
+   * @param connectionOptions
+   * @returns DynamicModule
+   */
+  static forRootNonInjection(
+    connectionOptions: ConnectionOptions,
+  ): DynamicModule {
+    const connection = createConnection(connectionOptions);
+    return {
+      module: TypeDormModule,
+      providers: [
+        {
+          provide: TypeDormConnection,
+          useValue: connection,
+        },
+      ],
+      exports: [TypeDormConnection],
     };
   }
 }

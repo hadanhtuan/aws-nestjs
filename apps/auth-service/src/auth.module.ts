@@ -1,9 +1,12 @@
 import { configuration } from '@lib/config/configuration';
-import { DynamoDBModule } from '@lib/module/dynamo';
+import { TypeDormModule, instanceName } from '@lib/module/dynamo';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { UserEntity, userTable } from '@lib/core/databases/dynamo/entities';
+import { DocumentClientV2 } from '@typedorm/document-client';
+import * as AWS from 'aws-sdk';
 
 @Module({
   imports: [
@@ -11,15 +14,23 @@ import { AuthService } from './auth.service';
       load: [configuration],
       isGlobal: true,
     }),
-    DynamoDBModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: async (config: ConfigService) => {
+    TypeDormModule.forRootAsync({
+      // need another name here for dependency injection, @InjectTypeDorm(instanceName)
+      inject: [ConfigService],
+      name: instanceName,
+      useFactory: (config: ConfigService) => {
+        const awsConfig = config.get('aws.dynamodb');
+        console.log(awsConfig);
+
         return {
-          AWSConfig: config.get('aws.config'),
-          dynamoDBOptions: config.get('aws.dynamodb'),
+          table: userTable,
+          name: instanceName,
+          entities: [UserEntity],
+          documentClient: new DocumentClientV2(
+            new AWS.DynamoDB.DocumentClient(awsConfig),
+          ),
         };
       },
-      inject: [ConfigService],
     }),
   ],
   controllers: [AuthController],

@@ -1,9 +1,6 @@
 import { Inject } from '@nestjs/common';
-import { getModelToken, getModelForClass } from '../utils';
-import { DynamoDBClass } from '../interfaces';
+import { getTypeDormConnectionToken } from '../utils';
 
-export const InjectModel = (model: DynamoDBClass) =>
-  Inject(getModelToken(model.name));
-
-export const ReturnModel = <T>(v?: any) =>
-  (false as true) && getModelForClass<T>(v, v, v, v);
+export const InjectTypeDorm = (name?: string) => {
+  return Inject(getTypeDormConnectionToken(name));
+};

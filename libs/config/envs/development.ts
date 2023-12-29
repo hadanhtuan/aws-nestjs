@@ -12,12 +12,14 @@ export const config = {
   },
   aws: {
     config: {
-      region: process.env.AWS_REGION || 'admin',
-      accessKeyId: process.env.AWS_ACCESS_ID || 'admin',
-      secretAccessKey: process.env.AWS_SECRET_KEY || 'admin',
+      region: process.env.AWS_REGION || 'AWS_REGION',
+      accessKeyId: process.env.AWS_ACCESS_ID || 'AWS_ACCESS_ID',
+      secretAccessKey: process.env.AWS_SECRET_KEY || 'AWS_SECRET_KEY',
     },
     dynamodb: {
       endpoint: process.env.DYNAMODB_ENDPOINT || 'admin',
+      accessKeyId: process.env.AWS_ACCESS_ID || 'AWS_ACCESS_ID',
+      secretAccessKey: process.env.AWS_SECRET_KEY || 'AWS_SECRET_KEY',
       region: process.env.DYNAMODB_REGION || 'http://localhost:6000/shell',
       sslEnabled: false,
     },

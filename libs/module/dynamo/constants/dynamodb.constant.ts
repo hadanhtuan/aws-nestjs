@@ -1,3 +1,4 @@
-export const DYNAMO_DB_CLIENT = Symbol('DYNAMO_DB_CONNECTION');
-export const DYNAMO_DB_DATA_MAPPER = Symbol('DYNAMO_DB_DATA_MAPPER');
-export const DYNAMO_DB_MODULE_OPTIONS = Symbol('DYNAMO_DB_MODULE_OPTIONS');
+export const TYPE_DORM_MODULE_NAME = 'default';
+export const TYPE_DORM_MODULE_TOKEN = 'TypeDormModuleToken';
+export const TYPE_DORM_MODULE_OPTION_TOKEN = 'TypeDormModuleOptionToken';
+export const instanceName = 'TypeDormInstanceName';

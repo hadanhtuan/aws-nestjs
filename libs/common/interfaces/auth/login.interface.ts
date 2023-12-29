@@ -28,5 +28,10 @@ export interface ILogin {
 
 export interface IRegister extends ILogin {
   email?: string;
+  status?: boolean;
   age?: number;
+}
+
+export interface IUser extends IRegister {
+  id?: string;
 }
